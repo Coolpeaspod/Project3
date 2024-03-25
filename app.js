@@ -5,6 +5,8 @@ const methodOverride = require("method-override");
 const eventRoutes = require("./routes/eventRoutes");
 const events = require("./models/event");
 const path = require("path");
+
+const mongoose = require("mongoose");
 //create app
 const app = express();
 
@@ -21,6 +23,16 @@ app.use(methodOverride("_method"));
 
 app.set("views", path.join(__dirname, "views"));
 
+//connect to database
+mongoose
+  .connect(
+    "mongodb+srv://panelpermit0x:v522C1EzZrg8dups@cluster0.kklwwjs.mongodb.net/"
+  )
+  .then(() => {
+    app.listen(port, host, () => {
+      console.log("Server is running on port, ", port);
+    });
+  });
 //set up routes
 app.get("/", (req, res) => {
   res.render("index");
@@ -70,6 +82,3 @@ app.get("/events/:id/edit", (req, res) => {
 });
 
 //start the server
-app.listen(port, host, () => {
-  console.log("Server is running on port, ", port);
-});
