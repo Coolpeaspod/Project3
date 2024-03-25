@@ -134,7 +134,11 @@
 //   }
 // };
 const mongoose = require("mongoose");
-const eventSchema = new mongoose.Schema({
+const { Timestamp } = require('bson');
+const { title } = require('process');
+const Schema = mongoose.Schema;
+
+const eventSchema = new Schema({
   category: {
     type: String,
     required: [true, 'Category is required']
