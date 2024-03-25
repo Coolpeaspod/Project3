@@ -36,7 +36,8 @@ mongoose
   })
   .catch((err) => {
     console.log(err);
-  });
+  }),
+  { useNewUrlParser: true, useUnifiedTopology: true };
 
 //set up routes
 app.get("/", (req, res) => {

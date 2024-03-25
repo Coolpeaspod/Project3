@@ -61,7 +61,7 @@ router.get("/:id", controller.show);
 router.get("/:id/edit", controller.edit);
 
 // PUT /events/:id
-router.put("/:id", upload.single("image"), async (req, res, next) => {
+router.put("/:_id", upload.single("image"), async (req, res, next) => {
   try {
     const eventId = req.params.id;
     const { topic, title, description, location, startTime, endTime } =
