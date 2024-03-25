@@ -134,6 +134,10 @@
 //   }
 // };
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const eventSchema = new Schema({
+  topic: {
 const { Timestamp } = require('bson');
 const { title } = require('process');
 const Schema = mongoose.Schema;

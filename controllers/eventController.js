@@ -25,15 +25,11 @@ exports.new = (req, res) => {
 
 //POST /events
 exports.create = (req, res, next) => {
-  //res.send('created a new story');
-  // console.log(req.body);
-  // let event = req.body;
-  // model.save(event);
-  // res.redirect("/events");
   let event = new model(req.body);
   event
-    .save()
-    .then(() => {
+    .save(event) // This line is corrected
+    .then((event) => {
+      console.log(event);
       res.redirect("/events");
     })
     .catch((err) => {
