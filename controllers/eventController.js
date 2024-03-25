@@ -1,4 +1,4 @@
-const e = require("express");
+const express = require("express");
 const model = require("../models/event");
 
 //GET /events: send all the events
