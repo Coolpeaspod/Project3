@@ -139,9 +139,9 @@ const { title } = require('process');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-  category: {
+  topic: {
     type: String,
-    required: [true, 'Category is required']
+    required: [true, 'Topic is required']
   },
   title: {
     type: String,
@@ -168,7 +168,7 @@ const eventSchema = new Schema({
     type: String,
     data: Buffer,
     required: [true, 'Image is required']
-  },
+  }
   // createdAt: {
   //   type: Date,
   //   required: true,

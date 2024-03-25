@@ -31,9 +31,8 @@ exports.create = (req, res, next) => {
   // model.save(event);
   // res.redirect("/events");
   let event = new model(req.body);
-  event
-    .save()
-    .then(() => {
+  event.save()
+    .then((event) => {
       res.redirect("/events");
     })
     .catch((err) => {
