@@ -3,10 +3,11 @@ const express = require("express");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
 const eventRoutes = require("./routes/eventRoutes");
-const events = require("./models/event");
+const Event = require("./models/event");
 const path = require("path");
 
 const mongoose = require("mongoose");
+const { findById } = require("./models/event");
 //create app
 const app = express();
 
@@ -32,7 +33,11 @@ mongoose
     app.listen(port, host, () => {
       console.log("Server is running on port, ", port);
     });
+  })
+  .catch((err) => {
+    console.log(err);
   });
+
 //set up routes
 app.get("/", (req, res) => {
   res.render("index");
