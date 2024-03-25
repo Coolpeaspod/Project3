@@ -137,37 +137,40 @@ const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema({
   category: {
     type: String,
-    required: true,
+    required: [true, 'Category is required']
   },
   title: {
     type: String,
-    required: true,
+    required: [true, 'Title is required']
   },
   description: {
     type: String,
-    required: true,
+    required: [true, 'Description is required'],
+    minLength: [10, 'the content should have at least 10 characters']
   },
   location: {
     type: String,
-    required: true,
+    required: [true, 'Location is required']
   },
   startTime: {
     type: Date,
-    required: true,
+    required: [true, 'Start time is required']
   },
   endTime: {
     type: Date,
-    required: true,
+    required: [true, 'End time is required']
   },
   image: {
     type: String,
     data: Buffer,
-    required: true,
+    required: [true, 'Image is required']
   },
-  createdAt: {
-    type: Date,
-    required: true,
-  },
-});
+  // createdAt: {
+  //   type: Date,
+  //   required: true,
+  // },
+},
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Event", eventSchema);
