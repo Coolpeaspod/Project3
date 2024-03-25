@@ -85,7 +85,7 @@ router.put("/:_id", upload.single("image"), async (req, res, next) => {
 
     if (!updatedEvent) {
       let err = Error("Cannot update event with id " + eventId);
-      err.status = 404;
+      err.status = 400;
       throw err;
     }
 
