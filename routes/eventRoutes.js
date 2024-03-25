@@ -1,8 +1,7 @@
 const express = require("express");
 const controller = require("../controllers/eventController");
-const events = require("../models/event");
+const Event = require("../models/event"); // Import the Event model
 const multer = require("multer");
-const { DateTime } = require("luxon");
 
 const router = express.Router();
 
@@ -28,29 +27,31 @@ router.get("/", controller.index);
 router.get("/new", controller.new);
 
 // POST /events
-router.post("/", upload.single("image"), (req, res) => {
-  // Retrieve other form data
-  const { topic, title, description, location, startTime, endTime } = req.body;
+router.post("/", upload.single("image"), async (req, res, next) => {
+  try {
+    const { topic, title, description, location, startTime, endTime } =
+      req.body;
+    const image = req.file ? "/uploads/" + req.file.filename : "";
 
-  // Handle image upload
-  const image = req.file ? "/uploads/" + req.file.filename : "";
+    // Create a new event instance
+    const newEvent = new Event({
+      topic,
+      title,
+      description,
+      location,
+      startTime,
+      endTime,
+      image,
+    });
 
-  // Create a new event
-  const newEvent = {
-    topic,
-    title,
-    description,
-    location,
-    startTime,
-    endTime,
-    image,
-  };
+    // Save the new event
+    await newEvent.save();
 
-  // Save the event
-  events.save(newEvent);
-
-  // Redirect to the event show page or any other desired page
-  res.redirect(`/events/${newEvent.id}`);
+    // Redirect to the event show page or any other desired page
+    res.redirect(`/events/${newEvent._id}`);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // GET /events/:id
@@ -60,41 +61,40 @@ router.get("/:id", controller.show);
 router.get("/:id/edit", controller.edit);
 
 // PUT /events/:id
-router.put("/:id", upload.single("image"), (req, res, next) => {
-  const eventId = req.params.id;
+router.put("/:id", upload.single("image"), async (req, res, next) => {
+  try {
+    const eventId = req.params.id;
+    const { topic, title, description, location, startTime, endTime } =
+      req.body;
+    const image = req.file ? "/uploads/" + req.file.filename : "";
 
-  // Retrieve other form data
-  const { topic, title, description, location, startTime, endTime } = req.body;
+    // Find the event by ID and update it
+    const updatedEvent = await Event.findByIdAndUpdate(
+      eventId,
+      {
+        topic,
+        title,
+        description,
+        location,
+        startTime,
+        endTime,
+        image,
+      },
+      { new: true }
+    ); // Set { new: true } to return the updated document
 
-  // Handle image upload
-  const image = req.file ? "/uploads/" + req.file.filename : "";
+    if (!updatedEvent) {
+      let err = Error("Cannot update event with id " + eventId);
+      err.status = 404;
+      throw err;
+    }
 
-  // Update the event by ID
-  const updatedEvent = {
-    topic,
-    title,
-    description,
-    location,
-    startTime,
-    endTime,
-    image,
-  };
-
-  const success = events.updateById(eventId, updatedEvent);
-
-  if (success) {
     // Redirect to the updated event show page or any other desired page
     res.redirect(`/events/${eventId}`);
-  } else {
-    // Handle error, e.g., event not found
-    // res.status(404).send("Event not found");
-    let err = Error("Cannot update event with id " + eventId);
-    err.status = 404;
+  } catch (err) {
     next(err);
   }
 });
-
-// GET /events/:id
 
 // DELETE /events/:id
 router.delete("/:id", controller.delete);

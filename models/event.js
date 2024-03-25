@@ -134,8 +134,10 @@
 //   }
 // };
 const mongoose = require("mongoose");
-const eventSchema = new mongoose.Schema({
-  category: {
+const Schema = mongoose.Schema;
+
+const eventSchema = new Schema({
+  topic: {
     type: String,
     required: true,
   },
@@ -162,10 +164,6 @@ const eventSchema = new mongoose.Schema({
   image: {
     type: String,
     data: Buffer,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
     required: true,
   },
 });
