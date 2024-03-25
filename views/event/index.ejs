@@ -45,11 +45,11 @@
                             </div>
                             <% } %>
 
-                                <% if(events.some(event=> event.topic === "Expose")) {%>
+                                <% if(events.some(event=> event.topic === "Expos")) {%>
                                     <div class="java mb-4">
-                                        <h5>Expose</h5>
+                                        <h5>Expos</h5>
                                         <ul class="list-group list-group-flush">
-                                            <%events.filter(event=> event.topic === "Expose").forEach(event => {%>
+                                            <%events.filter(event=> event.topic === "Expos").forEach(event => {%>
                                                 <li class="list-group-item"><a href="/events/<%=event._id%>">
                                                         <%= event.title%>
                                                     </a></li>
@@ -76,7 +76,7 @@
 
                                                 <% if(!events.some(event=> event.topic === "Fun" || event.topic ===
                                                     "Education" || event.topic == "Free stuff" || event.topic ==
-                                                    "Expose" || event.topic === "Other")) {%>
+                                                    "Expos" || event.topic === "Other")) {%>
                                                     <h6>There are no events. But you can add a new event.</h6>
                                                     <% } %>
 
