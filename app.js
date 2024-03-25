@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
 const eventRoutes = require("./routes/eventRoutes");
-const Event = require("./models/event");
+const events = require("./models/event");
 const path = require("path");
 
 const mongoose = require("mongoose");
