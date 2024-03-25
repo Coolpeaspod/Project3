@@ -4,6 +4,7 @@
   "description": "An express event management app",
   "main": "app.js",
   "dependencies": {
+    "bson": "^6.5.0",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "luxon": "^3.4.4",
