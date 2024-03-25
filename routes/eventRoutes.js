@@ -78,7 +78,7 @@ router.put("/:id", upload.single("image"), async (req, res, next) => {
         location,
         startTime,
         endTime,
-        image,
+        // image,
       },
       { new: true }
     ); // Set { new: true } to return the updated document
