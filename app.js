@@ -28,7 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 
 //connect to database
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(uri)
   .then(() => {
     app.listen(port, host, () => {
       console.log("Server is running on port, ", port);
