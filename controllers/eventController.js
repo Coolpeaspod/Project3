@@ -4,8 +4,10 @@ const model = require("../models/event");
 exports.index = (req, res, next) => {
   model
     .find()
+    //.lean() // simplfies the id as well, so it returns int which is not what we need
     .then((events) => {
       res.render("./event/index", { events });
+      //console.log(events);
     })
     .catch((err) => {
       next(err);
@@ -45,6 +47,7 @@ exports.show = (req, res, next) => {
   }
   model
     .findById(id)
+    //.lean() //doesnt work here either
     .then((event) => {
       if (event) {
         res.render("./event/show", { event });
