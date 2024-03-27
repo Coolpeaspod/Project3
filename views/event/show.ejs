@@ -7,10 +7,10 @@
           <%= event.topic %> - <%= event.title %>
         </h2>
         <form>
-          <button type="submit" formmethod="GET" formaction="/events/<%= event._id %>/edit">
+          <button type="submit" formmethod="GET" formaction="/events/<%= event.id %>/edit">
             <i class="bi bi-pen"></i>
           </button>
-          <button type="submit" formmethod="post" formaction="/events/<%= event._id %>?_method=DELETE">
+          <button type="submit" formmethod="post" formaction="/events/<%= event.id %>?_method=DELETE">
             <i class="bi bi-trash"></i>
           </button>
         </form>

@@ -2,6 +2,7 @@ const express = require("express");
 const controller = require("../controllers/eventController");
 const Event = require("../models/event"); // Import the Event model
 const multer = require("multer");
+const mongoose = require("mongoose");
 
 const router = express.Router();
 
@@ -67,6 +68,7 @@ router.put("/:id", upload.single("image"), async (req, res, next) => {
     const { topic, title, description, location, startTime, endTime } =
       req.body;
     const image = req.file ? "/uploads/" + req.file.filename : "";
+
 
     // Find the event by ID and update it
     const updatedEvent = await Event.findByIdAndUpdate(
