@@ -8,6 +8,7 @@ const eventSchema = new Schema(
     topic: {
       type: String,
       required: [true, "Topic is required"],
+      enum: ["Education", "Fun", "Other", "Free Stuff", "Expos"],
     },
     title: {
       type: String,
