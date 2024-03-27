@@ -45,12 +45,12 @@ app.get("/", (req, res) => {
 
 app.use("/events", eventRoutes);
 
-app.get('/about', (req, res) => {
-  res.render("about")
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
-app.get('/contact', (req, res) => {
-  res.render("contact")
+app.get("/contact", (req, res) => {
+  res.render("contact");
 });
 
 app.get("/events/:id", (req, res) => {

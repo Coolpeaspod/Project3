@@ -22,7 +22,7 @@ exports.new = (req, res) => {
 exports.create = (req, res, next) => {
   let event = new model(req.body);
   event
-    .save(event) // This line is corrected
+    .save(event)
     .then((event) => {
       console.log(event);
       res.redirect("/events");

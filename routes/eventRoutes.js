@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // Adjust the file size limit as needed
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 // GET /events: send all the events
