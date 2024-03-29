@@ -41,9 +41,8 @@
                     <label for="formStartTime" class="col-sm-2 col-form-label">Start</label>
                     <div class="col-sm-10">
                         <input type="datetime-local" class="form-control" name="startTime" id="formStartTime" <% if
-                            (event.startTime && typeof event.startTime==='function' ) { %>
-                        value="<%= event.startTime.toISOString().slice(0,16) %>"
-                            <% } %> required>
+                            (event.startTime && typeof event.startTime.toISOString==='function' ) { %> value="<%=
+                            event.startTime.toISOString().slice(0, 16) %>" <% } %> required>
                     </div>
                 </div>
 
@@ -51,11 +50,11 @@
                     <label for="formEndTime" class="col-sm-2 col-form-label">End</label>
                     <div class="col-sm-10">
                         <input type="datetime-local" class="form-control" name="endTime" id="formEndTime" <% if
-                            (event.endTime && typeof event.endTime.toISO==='function' ) { %>
-                        value="<%= event.endTime.toISO() %>"
-                            <% } %> required>
+                            (event.endTime && typeof event.endTime.toISOString==='function' ) { %> value="<%=
+                            event.endTime.toISOString().slice(0, 16) %>" <% } %> required>
                     </div>
                 </div>
+
 
                 <div class="row mb-3">
                     <label for="formWhere" class="col-sm-2 col-form-label">Where</label>

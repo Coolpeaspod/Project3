@@ -8,6 +8,8 @@ const path = require("path");
 
 const mongoose = require("mongoose");
 const { findById } = require("./models/event");
+const uri =
+  "mongodb+srv://panelpermit0x:v522C1EzZrg8dups@cluster0.kklwwjs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 //create app
 const app = express();
 
@@ -26,9 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 
 //connect to database
 mongoose
-  .connect(
-    "mongodb+srv://panelpermit0x:v522C1EzZrg8dups@cluster0.kklwwjs.mongodb.net/"
-  )
+  .connect(uri)
   .then(() => {
     app.listen(port, host, () => {
       console.log("Server is running on port, ", port);
@@ -36,8 +36,7 @@ mongoose
   })
   .catch((err) => {
     console.log(err);
-  }),
-  { useNewUrlParser: true, useUnifiedTopology: true };
+  });
 
 //set up routes
 app.get("/", (req, res) => {
@@ -46,12 +45,12 @@ app.get("/", (req, res) => {
 
 app.use("/events", eventRoutes);
 
-app.get('/about', (req, res) => {
-  res.render("about")
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
-app.get('/contact', (req, res) => {
-  res.render("contact")
+app.get("/contact", (req, res) => {
+  res.render("contact");
 });
 
 app.get("/events/:id", (req, res) => {
