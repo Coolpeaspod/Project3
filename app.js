@@ -78,6 +78,13 @@ app.get("/events/new", (req, res) => {
   res.render("event/new", { event: newEvent });
 });
 
+app.use((req, res, next) => {
+  let err = new Error('The server cannot locate ' + req.url);
+  err.status = 404;
+  next(err);
+
+});
+
 app.use((err, req, res, next) => {
   if (!err.status) {
     console.log(err.stack);
