@@ -1,11 +1,14 @@
 const model = require("../models/event");
+const luxon = require('luxon');
 
 //GET /events: send all the events
 exports.index = (req, res, next) => {
   model
     .find()
+    //.lean() // simplfies the id as well, so it returns int which is not what we need
     .then((events) => {
       res.render("./event/index", { events });
+      //console.log(events);
     })
     .catch((err) => {
       next(err);
@@ -45,8 +48,10 @@ exports.show = (req, res, next) => {
   }
   model
     .findById(id)
+    //.lean() //doesnt work here either
     .then((event) => {
       if (event) {
+        //console.log(event.startTime);
         res.render("./event/show", { event });
       } else {
         let err = Error("Cannot find event with id " + id);
@@ -71,6 +76,9 @@ exports.edit = (req, res, next) => {
     .findById(id)
     .then((event) => {
       if (event) {
+        let luxonDateTime = luxon.DateTime.fromJSDate(event.startTime);
+        //event.startTime = luxonDateTime;
+        console.log(luxonDateTime);
         return res.render("./event/edit", { event });
       } else {
         let err = Error("Cannot find event with id " + id);
@@ -100,6 +108,8 @@ exports.update = (req, res, next) => {
     })
     .then((event) => {
       if (event) {
+        //let luxonDateTime = luxon.DateTime.fromJSDate(event.startTime);
+        event.startTime = luxonDateTime;
         res.redirect("/events/" + id);
       } else {
         let err = Error("Cannot find event with id " + id);
