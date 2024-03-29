@@ -51,7 +51,6 @@ exports.show = (req, res, next) => {
     //.lean() //doesnt work here either
     .then((event) => {
       if (event) {
-        //console.log(event.startTime);
         res.render("./event/show", { event });
       } else {
         let err = Error("Cannot find event with id " + id);
@@ -76,9 +75,10 @@ exports.edit = (req, res, next) => {
     .findById(id)
     .then((event) => {
       if (event) {
-        let luxonDateTime = luxon.DateTime.fromJSDate(event.startTime);
-        //event.startTime = luxonDateTime;
-        console.log(luxonDateTime);
+        const timeStampStart = event.startTime;
+        const timeStampEnd = event.endTime;
+        timeStampStart.setHours(timeStampStart.getHours() - 4);
+        timeStampEnd.setHours(timeStampEnd.getHours() - 4);
         return res.render("./event/edit", { event });
       } else {
         let err = Error("Cannot find event with id " + id);
@@ -108,7 +108,6 @@ exports.update = (req, res, next) => {
     })
     .then((event) => {
       if (event) {
-        //let luxonDateTime = luxon.DateTime.fromJSDate(event.startTime);
         event.startTime = luxonDateTime;
         res.redirect("/events/" + id);
       } else {
